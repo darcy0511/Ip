@@ -1,0 +1,17 @@
+{
+    "name": "draguo/ip",
+    "description": "通过ip返回中文地理位置",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "draguo",
+            "email": "draguo@sina.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Draguo\\Ip\\": "src"
+        }
+    }
+}
