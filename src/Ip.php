@@ -7,8 +7,9 @@ class Ip
     protected $url = 'http://ip.taobao.com/service/getIpInfo.php?ip=';
     protected $result = '';
 
-    public function getLocation($ip)
+    public function location($arguments)
     {
+        $ip = $arguments[0];
         $data = $this->curl($ip);
         $this->format($data);
         return $this->result;
@@ -29,5 +30,20 @@ class Ip
         $data = json_decode($response)->data;
         $result = $data->region.$data->city.$data->county;
         return $this->result = $result;
+    }
+
+    public function __call($name, $arguments)
+    {
+        $map = ['getLocation' => 'location'];
+        if (is_array($arguments)){
+            $arguments = $arguments[0];
+        }
+        return $this->$map[$name]($arguments);
+    }
+
+    public static function __callStatic($name, $arguments)
+    {
+        $ip = new static();
+        return $ip->$name($arguments);
     }
 }
